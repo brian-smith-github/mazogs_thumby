@@ -1,0 +1,47 @@
+-------------------------------------------------------------------
+WARNING - installing any Arduino IDE based code on the Thumby
+will over-write the Python-based front-end code. 
+
+(Install the stock_firmware_xxx.uf2 file to restore, the latest
+ version is available from the Thumby IDE at tinycircuits.github.io)
+-------------------------------------------------------------------
+Quck Install:
+
+Connect Thumby to computer with USB cable, switch it off, hold the 'down'
+button in the D-pad and switch it on, let the 'down' button go after 2 seconds.
+
+A new drive should appear on the computer.
+
+Drag the file 'mazogs_thumby.ino.uf2' into the drive, then unmount the drive,
+(or whatever you do to gracefully disconnect a USB drive on your system instead
+of just yanking it out.)
+
+-------------------------------------------------------------------
+Compiling + Installing:
+
+
+in Arduino IDE, use the 'Boards Manager' to install:
+ 'Arduino Mbed OS RP2040 Boards' 
+
+Then select board 'Raspberry Pi Pico'.
+
+Compile the code. You need the 'HEX' file version of the compiled data.
+(google 'arduino hex file' for an idea of how to get that.)
+You then need to convert the  HEX file UF2 format.
+
+Use the uf2conv.py pythn script at:
+https://github.com/microsoft/uf2/blob/master/utils/uf2conv.py
+
+connect Thumby to computer with USB cable, switch it off, hold the 'down'
+button in the D-pad and switch it on, let the 'down' button go after 2 seconds. 
+
+A new drive should appear on the computer.
+
+then run something like:
+uf2conv.py -f  0xe48bff56 mazogs_thumby.ino.hex
+
+This will generate the UF2 file and automatically copy it to the thumby.
+You can add a '-o mazogs.uf2' to the command to generate a file you can
+drag-and-drop to the drive instead if you prefer.
+
+
